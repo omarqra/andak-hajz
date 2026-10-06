@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>عندك حجز — أسهل حجز</title>
+    <meta
+      name="description"
+      content="احجز ملعبك، جهّز سكوادك، والعب. تطبيق حجز الملاعب وتنظيم الماتشات في سوريا."
+    />
+    <meta name="theme-color" content="#0A0C0F" />
+    <link rel="icon" href="assets/favicon.ico" />
+    <link rel="apple-touch-icon" href="assets/icon-512.png" />
+
+    <meta property="og:title" content="عندك حجز — أسهل حجز" />
+    <meta
+      property="og:description"
+      content="احجز ملعبك، جهّز سكوادك، والعب."
+    />
+    <meta property="og:image" content="assets/icon-512.png" />
+    <meta property="og:type" content="website" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --ink: #0a0c0f;
+        --ink-2: #11151a;
+        --card: rgba(255, 255, 255, 0.035);
+        --line: rgba(255, 255, 255, 0.09);
+        --text: #f2f5f7;
+        --muted: #949ea8;
+        --mint: #2be38c;
+        --mint-deep: #11b96c;
+        --radius: 20px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Tajawal", "Segoe UI", system-ui, sans-serif;
+        background: var(--ink);
+        color: var(--text);
+        line-height: 1.75;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      .wrap {
+        width: min(1120px, 100% - 2.5rem);
+        margin-inline: auto;
+      }
+
+      /* ── ambient light ─────────────────────────────────────────── */
+      .glow {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background:
+          radial-gradient(
+            48rem 32rem at 80% -10%,
+            rgba(43, 227, 140, 0.16),
+            transparent 60%
+          ),
+          radial-gradient(
+            40rem 30rem at 5% 8%,
+            rgba(43, 227, 140, 0.07),
+            transparent 62%
+          );
+      }
+
+      main,
+      header,
+      footer {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ── nav ───────────────────────────────────────────────────── */
+      header {
+        padding: 1.6rem 0;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        font-weight: 800;
+        font-size: 1.12rem;
+        letter-spacing: -0.2px;
+      }
+
+      .brand img {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+      }
+
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.6rem 1.15rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.92rem;
+        transition: 0.22s;
+      }
+
+      .nav-cta:hover {
+        border-color: rgba(43, 227, 140, 0.55);
+        color: var(--mint);
+      }
+
+      /* ── hero ──────────────────────────────────────────────────── */
+      .hero {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        align-items: center;
+        gap: 3.5rem;
+        padding: 4.5rem 0 5.5rem;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 0.95rem;
+        border: 1px solid rgba(43, 227, 140, 0.3);
+        background: rgba(43, 227, 140, 0.07);
+        border-radius: 999px;
+        color: var(--mint);
+        font-size: 0.86rem;
+        font-weight: 700;
+        margin-bottom: 1.6rem;
+      }
+
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--mint);
+        box-shadow: 0 0 0 4px rgba(43, 227, 140, 0.16);
+      }
+
+      h1 {
+        font-size: clamp(2.6rem, 6.2vw, 4.4rem);
+        font-weight: 900;
+        line-height: 1.12;
+        letter-spacing: -1.4px;
+        margin-bottom: 1.1rem;
+      }
+
+      h1 .accent {
+        background: linear-gradient(100deg, var(--mint), #7af0bb);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .lede {
+        font-size: clamp(1.05rem, 2.1vw, 1.26rem);
+        color: var(--muted);
+        max-width: 34rem;
+        margin-bottom: 2.3rem;
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 1.05rem 2.1rem;
+        border-radius: 15px;
+        font-weight: 800;
+        font-size: 1.08rem;
+        text-decoration: none;
+        border: 0;
+        cursor: pointer;
+        transition: 0.22s;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--mint), var(--mint-deep));
+        color: #04210f;
+        box-shadow:
+          0 10px 34px -10px rgba(43, 227, 140, 0.6),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 16px 44px -10px rgba(43, 227, 140, 0.7),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+
+      .btn-primary:active {
+        transform: translateY(0);
+      }
+
+      .meta {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .meta b {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      /* ── phone ─────────────────────────────────────────────────── */
+      .phone-stage {
+        display: grid;
+        place-items: center;
+      }
+
+      .phone {
+        width: 268px;
+        aspect-ratio: 9 / 19;
+        border-radius: 42px;
+        padding: 11px;
+        background: linear-gradient(160deg, #262d35, #0e1216);
+        box-shadow:
+          0 50px 90px -30px rgba(0, 0, 0, 0.9),
+          0 0 0 1px rgba(255, 255, 255, 0.07);
+        position: relative;
+      }
+
+      .screen {
+        height: 100%;
+        border-radius: 32px;
+        background:
+          radial-gradient(
+            16rem 12rem at 50% 24%,
+            rgba(43, 227, 140, 0.16),
+            transparent 70%
+          ),
+          linear-gradient(170deg, #121820, #0a0d11);
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        gap: 1.1rem;
+        overflow: hidden;
+      }
+
+      .screen img {
+        width: 108px;
+        height: 108px;
+        border-radius: 28px;
+        box-shadow: 0 18px 40px -14px rgba(0, 0, 0, 0.8);
+      }
+
+      .screen .name {
+        font-weight: 900;
+        font-size: 1.5rem;
+        letter-spacing: -0.5px;
+      }
+
+      .screen .tag {
+        color: var(--mint);
+        font-weight: 700;
+        font-size: 0.95rem;
+        margin-top: -0.7rem;
+      }
+
+      .notch {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 92px;
+        height: 22px;
+        border-radius: 999px;
+        background: #05070a;
+      }
+
+      /* ── sections ──────────────────────────────────────────────── */
+      section {
+        padding: 4.5rem 0;
+      }
+
+      .section-head {
+        margin-bottom: 2.6rem;
+      }
+
+      h2 {
+        font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+        font-weight: 900;
+        letter-spacing: -0.8px;
+        margin-bottom: 0.5rem;
+      }
+
+      .section-head p {
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(248px, 1fr));
+        gap: 1.1rem;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 1.8rem;
+        transition: 0.25s;
+      }
+
+      .card:hover {
+        border-color: rgba(43, 227, 140, 0.35);
+        background: rgba(43, 227, 140, 0.05);
+        transform: translateY(-3px);
+      }
+
+      .icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 13px;
+        display: grid;
+        place-items: center;
+        background: rgba(43, 227, 140, 0.11);
+        border: 1px solid rgba(43, 227, 140, 0.22);
+        margin-bottom: 1.1rem;
+      }
+
+      .icon svg {
+        width: 23px;
+        height: 23px;
+        stroke: var(--mint);
+        fill: none;
+        stroke-width: 1.9;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .card h3 {
+        font-size: 1.16rem;
+        font-weight: 800;
+        margin-bottom: 0.4rem;
+      }
+
+      .card p {
+        color: var(--muted);
+        font-size: 0.97rem;
+      }
+
+      /* ── steps ─────────────────────────────────────────────────── */
+      .steps {
+        counter-reset: s;
+        display: grid;
+        gap: 0.9rem;
+      }
+
+      .step {
+        counter-increment: s;
+        display: flex;
+        gap: 1.15rem;
+        align-items: flex-start;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 1.4rem 1.6rem;
+      }
+
+      .step::before {
+        content: counter(s);
+        flex: 0 0 auto;
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+        display: grid;
+        place-items: center;
+        background: rgba(43, 227, 140, 0.12);
+        border: 1px solid rgba(43, 227, 140, 0.26);
+        color: var(--mint);
+        font-weight: 900;
+        font-size: 0.95rem;
+      }
+
+      .step p {
+        color: var(--muted);
+        font-size: 1rem;
+        padding-top: 0.15rem;
+      }
+
+      .step b {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .note {
+        margin-top: 1.4rem;
+        padding: 1.15rem 1.5rem;
+        border-radius: 14px;
+        border: 1px solid rgba(43, 227, 140, 0.26);
+        background: rgba(43, 227, 140, 0.06);
+        color: var(--muted);
+        font-size: 0.97rem;
+      }
+
+      .note b {
+        color: var(--text);
+      }
+
+      /* ── closing ───────────────────────────────────────────────── */
+      .closing {
+        text-align: center;
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        padding: 4rem 2rem;
+        background:
+          radial-gradient(
+            30rem 18rem at 50% 0%,
+            rgba(43, 227, 140, 0.12),
+            transparent 70%
+          ),
+          var(--card);
+      }
+
+      .closing h2 {
+        margin-bottom: 0.8rem;
+      }
+
+      .closing p {
+        color: var(--muted);
+        margin-bottom: 2rem;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        margin-top: 4rem;
+        padding: 2.2rem 0 3rem;
+        color: var(--muted);
+        font-size: 0.92rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      footer a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        color: var(--mint);
+      }
+
+      /* ── responsive ────────────────────────────────────────────── */
+      @media (max-width: 880px) {
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+          padding: 2.5rem 0 3.5rem;
+          text-align: center;
+        }
+
+        .lede {
+          margin-inline: auto;
+        }
+
+        .actions {
+          justify-content: center;
+        }
+
+        .phone-stage {
+          order: -1;
+        }
+
+        .phone {
+          width: 216px;
+        }
+
+        .nav-cta {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="glow"></div>
+
+    <header>
+      <div class="wrap nav">
+        <div class="brand">
+          <img src="assets/logo.png" alt="" />
+          <span>عندك حجز</span>
+        </div>
+        <a class="nav-cta" href="#download">نزّل التطبيق</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- ── hero ───────────────────────────────────────────────── -->
+      <div class="wrap hero">
+        <div>
+          <span class="eyebrow"><i class="dot"></i> متاح الآن لأندرويد</span>
+          <h1>احجز ملعبك<br /><span class="accent">بثلاث ضغطات</span></h1>
+          <p class="lede">
+            دوّر على ملعب قريب منك، شوف الفترات الفاضية بأسعارها، واحجز. جهّز
+            سكوادك، نظّم ماتشك، وخلّص.
+          </p>
+          <div class="actions">
+            <a
+              class="btn btn-primary"
+              id="download"
+              href="https://github.com/omarqra/andak-hajz/releases/latest/download/andak-hajz.apk"
+              download
+            >
+              <svg
+                width="21"
+                height="21"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              نزّل التطبيق
+            </a>
+            <span class="meta">
+              مجاني · <b>أندرويد ٧</b> فما فوق · ٨٧ م.ب
+            </span>
+          </div>
+        </div>
+
+        <div class="phone-stage">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <img src="assets/logo.png" alt="شعار عندك حجز" />
+              <div class="name">عندك حجز</div>
+              <div class="tag">أسهل حجز</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── features ───────────────────────────────────────────── -->
+      <section class="wrap">
+        <div class="section-head">
+          <h2>كل شي بمكان واحد</h2>
+          <p>من لمّا تدوّر على ملعب لحدّ ما تصفّر البداية.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <h3>ملاعب جنبك</h3>
+            <p>
+              شوف الملاعب القريبة منك على الخريطة، بصورها وأسعارها وتقييمات
+              اللي لعبوا فيها قبلك.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </div>
+            <h3>حجز فوري</h3>
+            <p>
+              الفترات الفاضية قدّامك بالوقت الحقيقي. اختار فترتك واحجزها، وما
+              حدا يقدر ياخدها منك.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <h3>سكوادك معك</h3>
+            <p>
+              اجمع شبابك بسكواد واحد، وابعتلهم كود الدعوة بالواتساب. مرّة وحدة
+              وبيضلّوا معك.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <h3>ماتش ناقصو لاعيبة</h3>
+            <p>
+              ناقصك لاعبين؟ افتح الماتش للكل وخلّي حدا يكمّل العدد ويتقاسم
+              معك الحساب.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
+                />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+            </div>
+            <h3>ما بيفوتك شي</h3>
+            <p>
+              إشعار لمّا ينقبل حجزك، لمّا يكتمل عدد الماتش، ولمّا يقرب موعدك.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <h3>عندك ملعب؟</h3>
+            <p>
+              سجّل منشأتك، حدّد دوامك وأسعارك، واستقبل الحجوزات. لوحتك بتقلّك
+              شو صاير اليوم.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── install ────────────────────────────────────────────── -->
+      <section class="wrap">
+        <div class="section-head">
+          <h2>كيف تنصّبو</h2>
+          <p>أقلّ من دقيقة.</p>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <p>
+              اضغط <b>«نزّل التطبيق»</b> فوق. بيبلّش التنزيل عالطول.
+            </p>
+          </div>
+          <div class="step">
+            <p>
+              افتح الملف من قائمة التنزيلات بتلفونك.
+            </p>
+          </div>
+          <div class="step">
+            <p>
+              أول مرّة بس، أندرويد بيسألك إذا بتسمح بالتنصيب من خارج المتجر —
+              اضغط <b>«السماح»</b> ثم ارجع واضغط <b>«تنصيب»</b>.
+            </p>
+          </div>
+        </div>
+
+        <p class="note">
+          <b>عندك التطبيق من قبل؟</b> نزّل نفس الملف وبيحدّثو فوق القديم —
+          حسابك بيضلّ فاتح وما بتحتاج تحذف شي.
+        </p>
+      </section>
+
+      <!-- ── closing ────────────────────────────────────────────── -->
+      <section class="wrap">
+        <div class="closing">
+          <h2>يلا، الملعب ناطرك</h2>
+          <p>نزّل التطبيق واحجز أول فترة إلك اليوم.</p>
+          <a
+            class="btn btn-primary"
+            href="https://github.com/omarqra/andak-hajz/releases/latest/download/andak-hajz.apk"
+            download
+          >
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            نزّل التطبيق
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>عندك حجز · حجز ملاعب وتنظيم ماتشات في سوريا</span>
+      <a href="https://github.com/omarqra/andak-hajz/releases">كل الإصدارات</a>
+    </footer>
+  </body>
+</html>
