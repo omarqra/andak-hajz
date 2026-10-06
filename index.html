@@ -239,6 +239,20 @@
         font-weight: 700;
       }
 
+      /* « · » is forbidden between these segments: in Arabic the middle dot
+         reads as ٠, and two of the three segments end or begin with a digit,
+         so «أندرويد ٧ · ٨٨ م.ب» was being read aloud as «٧٠٨٨». A drawn
+         hairline separates them instead and says nothing. */
+      .meta i {
+        display: inline-block;
+        width: 1px;
+        height: 0.85em;
+        margin: 0 0.6rem;
+        vertical-align: -0.1em;
+        background: currentColor;
+        opacity: 0.45;
+      }
+
       /* ── phone ─────────────────────────────────────────────────── */
       .phone-stage {
         display: grid;
@@ -580,7 +594,7 @@
               نزّل التطبيق
             </a>
             <span class="meta">
-              مجاني · <b>أندرويد ٧</b> فما فوق · ٨٧ م.ب
+              مجاني<i></i><b>أندرويد ٧</b> فما فوق<i></i>٨٨ م.ب
             </span>
           </div>
         </div>
